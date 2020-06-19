@@ -11,11 +11,11 @@ feel free to use these wherever you want (credited or not, but I'd prefer credit
 
 # table of contents
 
-1. [chance](https://gihub.com/QeaML/random#chance)
-2. [code generator](https://gihub.com/QeaML/random#code%20generator)
-3. [discord cache](https://gihub.com/QeaML/random#discord%20cache)
-4. [tuple from timedelta](https://gihub.com/QeaML/random#tuple%20from%20timedelta)
-5. [waiter threads](https://gihub.com/QeaML/random#waiter%20threads)
+1. [chance](https://github.com/QeaML/random#chance)
+2. [code generator](https://github.com/QeaML/random#code-generator)
+3. [discord cache](https://github.com/QeaML/random#discord-cache)
+4. [tuple from timedelta](https://github.com/QeaML/random#tuple-from-timedelta)
+5. [waiter threads](https://github.com/QeaML/random#waiter-threads)
 
 ## chance
 A simple script allowing to generate 1 in `n` random bools.
