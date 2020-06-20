@@ -16,6 +16,7 @@ feel free to use these wherever you want (credited or not, but I'd prefer credit
 3. [discord cache](https://github.com/QeaML/random#discord-cache)
 4. [tuple from timedelta](https://github.com/QeaML/random#tuple-from-timedelta)
 5. [waiter threads](https://github.com/QeaML/random#waiter-threads)
+6. [cooldown thread](https://github.com/QeaML/random#cooldown-thread)
 
 ## chance
 [*source*](chance.py)
@@ -82,4 +83,28 @@ def waiter2_func(dt):
 
 waiter.start()
 waiter2.start(datetime.now()) # the datetime will be passed to waiter2_func
+```
+
+## cooldown thread
+[*source*](cooldown_thread.py)
+
+Simple thread which constantly decrements all values in an internal `dict`, emitting an event when one reaches zero. Also implements subsctipting.
+
+Example:
+```py
+from cooldown_thread import CooldownThread
+
+ct = CooldownThread()
+
+@ct.event("cooldown_end")
+def cooldown_end_event(cooldown):
+	print(f"A cooldown has ended: {cooldown}")
+	print(f"The cooldown 'end' will end in {ct['end']} seconds.")
+	if cooldown == "restart":
+		ct.set("restarted", 10.0)
+	elif cooldown == "end":
+		exit()
+
+ct["restart"] = 5.0   # 5s
+ct['end'] = 10500     # 10500ms == 10.5s
 ```
