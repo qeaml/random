@@ -1,7 +1,16 @@
-from qutils import alphabet, numbers
-from random import randint as r
+from random import choice, randint
+from string import ascii_letters
 
-a = alphabet + numbers
-c = lambda l : ''.join([a[r(0, len(a)-1)] for x in range(1, l)])
+CHARS = "abcdefghijklmnopqrstuvwxyz0123456789"
 
-__all__ = ['c']
+def generate_code(length):
+	out = ""
+	for _ in range(0, length):
+		char = choice(CHARS)
+		if not randint(0, 2):
+			char = char.upper()
+		out += char
+
+if __name__ == '__main__':
+	for i in range(5, 11):
+		print(generate_code(i))

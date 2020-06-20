@@ -36,9 +36,9 @@ Generates an alphanumeric code of the given length.
 
 Example:
 ```py
-from code_generator import *
-# prints a seven character long code
-print(c(7))
+from code_generator import generate_code
+# prints a 15 character long code
+print(generate_code(15))
 ```
 
 ## discord cache
