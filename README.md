@@ -62,7 +62,7 @@ print(get_timedelta_tuple(delta))
 ## waiter threads
 [*source*](waiter_threads.py)
 
-Simple threads which wrap functions ran after a delay from the thread's `.run()` being called. All arguments passed to `run` will be passed to the wrapped function. A function can be wrapped by using the thread's decorator `.wrap`.
+Simple threads which wrap functions ran after a delay from the thread's `.start()` being called. All arguments passed to `start` will be passed to the wrapped function. A function can be wrapped by using the thread's decorator `.wrap`.
 
 Example:
 ```py
@@ -80,6 +80,6 @@ def waiter_func():
 def waiter2_func(dt):
     print(f"half a second has passed since {dt}")
 
-waiter.run()
-waiter2.run(datetime.now()) # the datetime will be passed to waiter2_func
+waiter.start()
+waiter2.start(datetime.now()) # the datetime will be passed to waiter2_func
 ```
