@@ -17,6 +17,7 @@ feel free to use these wherever you want (credited or not, but I'd prefer credit
 4. [tuple from timedelta](https://github.com/QeaML/random#tuple-from-timedelta)
 5. [waiter threads](https://github.com/QeaML/random#waiter-threads)
 6. [cooldown thread](https://github.com/QeaML/random#cooldown-thread)
+7. [file dumper](https://github.com/QeaML/random#file-dumper)
 
 ## chance
 [*source*](chance.py)
@@ -107,4 +108,33 @@ def cooldown_end_event(cooldown):
 
 ct["restart"] = 5.0   # 5s
 ct['end'] = 10500     # 10500ms == 10.5s
+```
+
+## file dumper
+[*source*](filedumper.py)
+
+Provides a simple thread-based system for socket-based connections, that allow to dump any utf-8 encoded data into a file through a very simple protocol. Packets are formed like this:
+
+name | index in packet | length | meaning
+-----|-----------------|--------|--------
+op | `0` | 1 byte | opcode for packet (list below)
+data | `1` | 0+ bytes | packet's data
+
+Here's a list of opcodes:
+
+opcode | name | description | has data?
+-------|------|-------------|----------
+`0x00` | start dump | Starts the file stream. Data is used as filename. | yes
+`0x0F` | data | Writes data to the file stream. | yes
+`0xFF` | end dump | Ends the file stream and saves all data to file. This also closes the connections | no
+
+Example:
+```py
+from filedumper import ConnectionThr
+from socket import create_server
+
+sock = create_server(("localhost", 33787))
+while True:
+    c, i = sock.accept()
+    ConnectionThr(c).start()
 ```
