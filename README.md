@@ -18,6 +18,7 @@ feel free to use these wherever you want (credited or not, but I'd prefer credit
 5. [waiter threads](https://github.com/QeaML/random#waiter-threads)
 6. [cooldown thread](https://github.com/QeaML/random#cooldown-thread)
 7. [file dumper](https://github.com/QeaML/random#file-dumper)
+8. [FileDumperClient](https://github.com/QeaML/random#filedumperclient)
 
 ## chance
 [*source*](chance.py)
@@ -137,4 +138,16 @@ sock = create_server(("localhost", 33787))
 while True:
     c, i = sock.accept()
     ConnectionThr(c).start()
+```
+
+## FileDumperClient
+[*source*](FileDumperClient.java)
+
+A simple Java program that connects to a [filedumper](https://github.com/QeaML/random#file-dumper) instance (assumed to be running on `localhost:33787`) and allows you to specify a filename and contents of a file.
+
+Usage:
+
+```
+javac FileDumperClient.java
+java -cp . FileDumperClient
 ```
