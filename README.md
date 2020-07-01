@@ -19,6 +19,7 @@ feel free to use these wherever you want (credited or not, but I'd prefer credit
 6. [cooldown thread](https://github.com/QeaML/random#cooldown-thread)
 7. [file dumper](https://github.com/QeaML/random#file-dumper)
 8. [FileDumperClient](https://github.com/QeaML/random#filedumperclient)
+9. [delta coding](https://github.com/QeaML/random#delta-coding)
 
 ## chance
 [*source*](chance.py)
@@ -150,4 +151,18 @@ Usage:
 ```
 javac FileDumperClient.java
 java -cp . FileDumperClient
+```
+
+## delta coding
+[*source*](delta_coding.py)
+
+An implementation of [delta coding](https://en.wikipedia.org/wiki/Delta_encoding).
+
+Example:
+```py
+from delta_coding import *
+l = [10,13,10,6,7,8]
+encoded = delta_encode(l)
+decoded = delta_decode(encoded)
+print(encoded, decoded)
 ```
