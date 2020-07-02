@@ -20,6 +20,7 @@ feel free to use these wherever you want (credited or not, but I'd prefer credit
 7. [file dumper](https://github.com/QeaML/random#file-dumper)
 8. [FileDumperClient](https://github.com/QeaML/random#filedumperclient)
 9. [delta coding](https://github.com/QeaML/random#delta-coding)
+10. ["repeat every" threads](https://github.com/QeaML/random#repeat-every-threads)
 
 ## chance
 [*source*](chance.py)
@@ -165,4 +166,33 @@ l = [10,13,10,6,7,8]
 encoded = delta_encode(l)
 decoded = delta_decode(encoded)
 print(encoded, decoded)
+```
+
+## "repeat every" threads
+[*source*](repeat_every_threads.py)
+
+Simple threads, based on the [waiter threads](https://github.com/QeaML/random#waiter-threads), which run the wrapped function evey `n` seconds, rather than `n` seconds after the `.start()` call.
+
+Example:
+```py
+import asyncio
+from repeat_every_threads import *
+from datetime import datetime
+
+loop = asyncio.get_event_loop()
+ret = RepeatEveryThread(5)
+@ret.wrap
+def print1():
+    print(f"{datetime.now()} - this should happen every 5 seconds"
+    f" (# {ret.repeats})")
+    
+aret = AsyncRepeatEveryThread(7, loop)
+@aret.wrap
+async def print2():
+    print(f"{datetime.now()} - this should happen every 7 seconds" 
+    f" (# {aret.repeats})")
+    
+print(f"{datetime.now()} - start")
+ret.start()
+aret.start()
 ```
