@@ -21,6 +21,7 @@ feel free to use these wherever you want (credited or not, but I'd prefer credit
 8. [FileDumperClient](https://github.com/QeaML/random#filedumperclient)
 9. [delta coding](https://github.com/QeaML/random#delta-coding)
 10. ["repeat every" threads](https://github.com/QeaML/random#repeat-every-threads)
+11. [eval server](https://github.com/QeaML/random#eval-server)
 
 ## chance
 [*source*](chance.py)
@@ -195,4 +196,25 @@ async def print2():
 print(f"{datetime.now()} - start")
 ret.start()
 aret.start()
+```
+
+## eval server
+[*source*](eval_server.py)
+
+A simple server which writes all input into a file and then uses a subprocess to evaluate it, then returning the result.
+
+**WARNING:** This server lacks any kind of sandboxing, so watch out I guess.
+
+Example:
+```py
+from eval_server import *
+from socket import create_server
+
+def handle_conn(c):
+    ConnectionThr(c).start()
+    
+server = create_server(('localhost', 33797))
+while True:
+    c, _ = server.accept()
+    handle_conn(c)
 ```
