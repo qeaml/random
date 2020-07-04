@@ -22,7 +22,7 @@ feel free to use these wherever you want (credited or not, but I'd prefer credit
 9. [delta coding](https://github.com/QeaML/random#delta-coding)
 10. ["repeat every" threads](https://github.com/QeaML/random#repeat-every-threads)
 11. [eval server](https://github.com/QeaML/random#eval-server)
-12 . [JSON DB](https://github.com/QeaML/random#json-db)
+12. [JSON DB](https://github.com/QeaML/random#json-db)
 
 ## chance
 [*source*](chance.py)
