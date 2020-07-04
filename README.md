@@ -22,6 +22,7 @@ feel free to use these wherever you want (credited or not, but I'd prefer credit
 9. [delta coding](https://github.com/QeaML/random#delta-coding)
 10. ["repeat every" threads](https://github.com/QeaML/random#repeat-every-threads)
 11. [eval server](https://github.com/QeaML/random#eval-server)
+12 . [JSON DB](https://github.com/QeaML/random#json-db)
 
 ## chance
 [*source*](chance.py)
@@ -217,4 +218,21 @@ server = create_server(('localhost', 33797))
 while True:
     c, _ = server.accept()
     handle_conn(c)
+```
+
+## JSON DB
+[*source*](json_db.py)
+
+A JSON-based serverless database. A cool feature is that the database instead of returning `dict`s as expected, it returns special `DBObject` objects, which function like any other dict, but modifying their contents also modifies their contents in the actual database. Thanks to this, you can make your way through deep these objects (eg. `db['this']['is']['a']['very']['long']['path']`) and all changes you make will be saved.
+
+Example:
+```py
+from json_db import load
+
+db = load('data.db')
+db['key'] = 'value'
+db['object'] = {'key':'another value'}
+print(db['object']['key']) #another value
+db['object']['key'] = 'different value'
+print(db['object']['key']) #different value
 ```
