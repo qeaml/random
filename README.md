@@ -236,3 +236,14 @@ print(db['object']['key']) #another value
 db['object']['key'] = 'different value'
 print(db['object']['key']) #different value
 ```
+
+## str to num
+[*source*](str_to_num.cpp)
+
+I've been training my C++ skills, so I made this litte program. All it does is ask you for a word and prints the ASCII value of every character.
+
+Usage:
+```console
+g++ str_to_num.cpp -o str_to_num
+str_to_num
+```
