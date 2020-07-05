@@ -22,31 +22,44 @@ class DBObject:
     """
     def __init__(self, db, key, value):
         self._db = db
-        self.key = key
+        self._key = key
         self.value = value
+        
+    def _update(self):
+        self._db._update(self._key, self.value)
 
     def get(self, key):
         v = self.value[key]
         if isinstance(v, dict):
-            return DBObject(self._db, f'{self.key}.{key}', v)
+            return DBObject(self._db, f'{self._key}.{key}', v)
         else:
             return v
 
     def set(self, key, value):
         self.value[key] = value
-        self._db._update(self.key, self.value)
+        self._update()
+        
+    def delete(self, key):
+        del self.value[key]
+        self._update()
 
     def __getitem__(self, key):
         return self.get(key)
 
     def __setitem__(self, key, value):
-        return self.set(key, value)
+        self.set(key, value)
+        
+    def __delitem__(self, key):
+        self.delete(key)
 
     def __str__(self):
         return f'<object "{self.key}" in {self._db}>'
         
     def __dict__(self):
         return self.value
+        
+    def __len__(self):
+        return len(self.value)
 
 class Database:
     """
@@ -116,7 +129,6 @@ class Database:
 
     def __setitem__(self, key, value):
         return self.set(key, value)
-        
     
     def __str__(self):
         return f'<database in "{self.filename}">'
