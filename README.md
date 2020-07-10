@@ -23,6 +23,7 @@ feel free to use these wherever you want (credited or not, but I'd prefer credit
 10. ["repeat every" threads](https://github.com/QeaML/random#repeat-every-threads)
 11. [eval server](https://github.com/QeaML/random#eval-server)
 12. [JSON DB](https://github.com/QeaML/random#json-db)
+13. [str2num](https://github.com/QeaML/random#str2num)
 
 ## chance
 [*source*](chance.py)
@@ -237,13 +238,25 @@ db['object']['key'] = 'different value'
 print(db['object']['key']) #different value
 ```
 
-## str to num
-[*source*](str_to_num.cpp)
+## str2num
+[*source*](str2num.h)
 
-I've been training my C++ skills, so I made this litte program. All it does is ask you for a word and prints the ASCII value of every character.
+C header with functions: `str2int` and `str2flt`, which convert "cstring"s (`char*`) to `int`s/`float`s. This isn't optimal because it was a shower thought.
 
-Usage:
-```console
-g++ str_to_num.cpp -o str_to_num
-str_to_num
+Example:
+```c
+#include<stdio.h>
+#include"str2num.h"
+
+int main()
+{
+    char* int_str = "123";      // cstring "123"
+    char* flt_str = "1.2";      // cstring "1.2"
+    
+    int     str_int = str2int(int_str); // cstring -> int
+    float   str_flt = str2flt(flt_str); // cstring -> float
+    
+    printf("int: %d\nfloat: %f\n", str_int, str_flt);
+    return 0;
+}
 ```
