@@ -24,6 +24,7 @@ feel free to use these wherever you want (credited or not, but I'd prefer credit
 11. [eval server](https://github.com/QeaML/random#eval-server)
 12. [JSON DB](https://github.com/QeaML/random#json-db)
 13. [str2num](https://github.com/QeaML/random#str2num)
+14. [keyboard typing](https://github.com/QeaML/random#keyboard-typing)
 
 ## chance
 [*source*](chance.py)
@@ -259,4 +260,20 @@ int main()
     printf("int: %d\nfloat: %f\n", str_int, str_flt);
     return 0;
 }
+```
+
+## keyboard typing
+[*source*](keyboardTyping.py)
+
+A simple function which takes some text and returns a theoretical amount of time it'd take to type that text. Please do note that this is not accurate, but is better than just multiplying the text's length by 1.3, as it takes key distance and uppercase/lowercase differences into account. Again - it is closer to being accurate, and is not accurate. Also supports "rushed" typing, which makes the base time shorter, but has a random penalty. The random penalty is meant to replicate human error, as we mere mortals are much more prone to error when doing things very fast.
+
+Example:
+```py
+from keyboardTyping import totalTime
+from time import sleep
+
+time = totalTime("The quick brown fox jumped over the lazy dog.")
+print("It took me", time.seconds, "seconds to type:")
+sleep(time.seconds)
+print("The quick brown fox jumped over the lazy dog.")
 ```
