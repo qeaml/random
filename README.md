@@ -25,6 +25,7 @@ feel free to use these wherever you want (credited or not, but I'd prefer credit
 12. [JSON DB](https://github.com/QeaML/random#json-db)
 13. [str2num](https://github.com/QeaML/random#str2num)
 14. [keyboard typing](https://github.com/QeaML/random#keyboard-typing)
+15. [whatpulse rank](https://github.com/QeaML/random#whatpulse-rank)
 
 ## chance
 [*source*](chance.py)
@@ -276,4 +277,17 @@ time = totalTime("The quick brown fox jumped over the lazy dog.")
 print("It took me", time.seconds, "seconds to type:")
 sleep(time.seconds)
 print("The quick brown fox jumped over the lazy dog.")
+```
+
+## whatpulse rank
+[*source*](whatpulse_rank.py)
+
+A simple script that calculates a WhatPulse users's average rank.
+
+Example:
+```py
+from whatpulse_rank import get_avg_rank
+username = input("What is your WhatPulse username?\n>> ")
+avg = get_avg_rank(username)
+print(f"Your average ranking is: {avg}")
 ```
