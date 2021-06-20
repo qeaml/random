@@ -12,6 +12,7 @@
 10. ["repeat every" threads](https://github.com/qeamlgit/random#repeat-every-threads)
 11. [eval server](https://github.com/qeamlgit/random#eval-server)
 12. [JSON DB](https://github.com/qeamlgit/random#json-db)
+13. [dictfile](https://github.com/qeamlgit/random#dictfile)
 
 ## chance
 
@@ -117,33 +118,30 @@ ct['end'] = 10500     # 10500ms == 10.5s
 
 ## file dumper
 
-[_source_](filedumper.py)
+[_source_](filedumper2.go)
 
-Provides a simple thread-based system for socket-based connections, that allow to dump any utf-8 encoded data into a file through a very simple protocol. Packets are formed like this:
+Allows you to dump any bytes into a file via a socket on port 33787. Originally
+written in Python, but rewrittern in Go. [_see the old version_](filedumper.py)
+
+Packet structure.
 
 | name | index in packet | length   | meaning                        |
 | ---- | --------------- | -------- | ------------------------------ |
 | op   | `0`             | 1 byte   | opcode for packet (list below) |
 | data | `1`             | 0+ bytes | packet's data                  |
 
-Here's a list of opcodes:
+Opcodes:
 
-| opcode | name       | description                                                                       | has data? |
-| ------ | ---------- | --------------------------------------------------------------------------------- | --------- |
-| `0x00` | start dump | Starts the file stream. Data is used as filename.                                 | yes       |
-| `0x0F` | data       | Writes data to the file stream.                                                   | yes       |
-| `0xFF` | end dump   | Ends the file stream and saves all data to file. This also closes the connections | no        |
+| opcode | name     | description                                                     | has data? |
+| ------ | -------- | --------------------------------------------------------------- | --------- |
+| `0x00` | filename | Sets the filename to the provided data.                         | yes       |
+| `0x0F` | data     | Appends it's data to the internal buffer.                       | yes       |
+| `0xFF` | dump     | Dumps the internal buffer into the file. Closes the connection. | no        |
 
-Example:
+Usage:
 
-```py
-from filedumper import ConnectionThr
-from socket import create_server
-
-sock = create_server(("localhost", 33787))
-while True:
-    c, i = sock.accept()
-    ConnectionThr(c).start()
+```shell
+go run filedumper2.go
 ```
 
 ## FileDumperClient
