@@ -247,3 +247,37 @@ print(db['object']['key']) #another value
 db['object']['key'] = 'different value'
 print(db['object']['key']) #different value
 ```
+
+## dictfile
+
+[_source_](dictfile.py)
+
+Simple, cached dict-access to a simply formatted file.
+
+A dictfile looks something like this:
+
+```txt
+@ this is a comment
+
+@ empty lines are also ignored
+
+value: "this is str"
+this is int: 123
+a float: 12.3
+my list: ["hello", "world"]
+
+@ all values are python literals
+```
+
+Example:
+
+```py
+from dictfile import dictfile
+
+df["value"]   # cache miss, will be read from file
+df["a float"] # cache miss
+df["value"]   # cache hit, since 30 seconds didn't pass
+
+# -- after 30 seconds --
+df["value"]   # cache hit, but it's stale, so will read from file
+```
