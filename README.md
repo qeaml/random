@@ -282,9 +282,12 @@ df["value"]   # cache hit, but it's stale, so will read from file
 
 ## File Corruptor
 
+[_source_](file_corruptor.py)
+
 A simple script that corrupts a portion of any file. You are free to specify how
 much corruption you want in your file. The original file remains untouched, and
 a second, `.bin` version of the file gets created with the corruption applied.
+Use on a `.wav` file for some cool effects!
 
 Example:
 
