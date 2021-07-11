@@ -279,3 +279,19 @@ df["value"]   # cache hit, since 30 seconds didn't pass
 # -- after 30 seconds --
 df["value"]   # cache hit, but it's stale, so will read from file
 ```
+
+## File Corruptor
+
+A simple script that corrupts a portion of any file. You are free to specify how
+much corruption you want in your file. The original file remains untouched, and
+a second, `.bin` version of the file gets created with the corruption applied.
+
+Example:
+
+```py
+from file_corruptor import corrupt
+
+fn = input("Filename to corrupt:\n").strip()
+amt = float(input("How much corruption? (%)\n").strip()) / 100
+corrupt(fn, amt)
+```

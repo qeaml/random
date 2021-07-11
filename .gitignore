@@ -4,3 +4,9 @@ __src.py
 *.db
 .vscode
 unfinished
+*.wav
+*.old
+*.bin
+*.jpg
+*.png
+*.txt
