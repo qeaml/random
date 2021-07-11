@@ -13,6 +13,8 @@
 11. [eval server](https://github.com/qeamlgit/random#eval-server)
 12. [JSON DB](https://github.com/qeamlgit/random#json-db)
 13. [dictfile](https://github.com/qeamlgit/random#dictfile)
+14. [File Corruptor](https://github.com/qeamlgit/random#file-corruptor)
+15. [HumanDir](https://github.com/qeamlgit/random#humandir)
 
 ## chance
 
@@ -297,4 +299,37 @@ from file_corruptor import corrupt
 fn = input("Filename to corrupt:\n").strip()
 amt = float(input("How much corruption? (%)\n").strip()) / 100
 corrupt(fn, amt)
+```
+
+## HumanDir
+
+[_source_](humandir.py)
+
+A more human-friendly way to interact with directories. Can create subdirectories,
+files and subdirectory hierarchiies. Also allows to run commands from the
+directory object itself.
+
+Example:
+
+```py
+from humandir import directory
+
+projname = input("Project name?\n")
+
+# get the root folder our project will be stored in
+root = directory.from_str("/projects")
+# create the project directory
+projdir = root.ensure_dir(projname)
+# create multiple directories within the project directory
+projdir.ensure_all_dirs("src", "data")
+# create an empty file
+projdir.ensure_file(".gitignore")
+# create and write to a file
+projdir.dump_file_str("README.md", f"# {projname}")
+# initialize a git repo in the directory
+projdir.cmd("git","init")
+# start VS Code
+projdir.cmd("code", ".")
+
+print("Done :)")
 ```
