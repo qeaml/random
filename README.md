@@ -123,7 +123,7 @@ ct['end'] = 10500     # 10500ms == 10.5s
 [_source_](filedumper2.go)
 
 Allows you to dump any bytes into a file via a socket on port 33787. Originally
-written in Python, but rewrittern in Go. [_see the old version_](filedumper.py)
+written in Python, but rewrittern in Go. [_see the old version_](python/filedumper.py)
 
 Packet structure.
 
