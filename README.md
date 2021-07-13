@@ -18,7 +18,7 @@
 
 ## chance
 
-[_source_](chance.py)
+[_source_](python/chance.py)
 
 A simple script allowing to generate 1 in `n` random bools.
 
@@ -32,7 +32,7 @@ if chance(15):
 
 ## code generator
 
-[_source_](code_generator.py)
+[_source_](python/code_generator.py)
 
 Generates an alphanumeric code of the given length.
 
@@ -46,13 +46,13 @@ print(generate_code(15))
 
 ## discord cache
 
-[_source_](discordcache.py)
+[_source_](python/discordcache.py)
 
 Enumerates over files copied from Discord's cache and assigns them proper extensions based on the image header.
 
 ## tuple from timedelta
 
-[_source_](get_timedelta_tuple.py)
+[_source_](python/get_timedelta_tuple.py)
 
 Using `divmod` extracts the amount of days, hours, minutes and seconds from a `timedelta` object using it's `total_seconds` method.
 
@@ -67,7 +67,7 @@ print(get_timedelta_tuple(delta))
 
 ## waiter threads
 
-[_source_](waiter_threads.py)
+[_source_](python/waiter_threads.py)
 
 Simple threads which wrap functions ran after a delay from the thread's `.start()` being called. All arguments passed to `start` will be passed to the wrapped function. A function can be wrapped by using the thread's decorator `.wrap`.
 
@@ -94,7 +94,7 @@ waiter2.start(datetime.now()) # the datetime will be passed to waiter2_func
 
 ## cooldown thread
 
-[_source_](cooldown_thread.py)
+[_source_](python/cooldown_thread.py)
 
 Simple thread which constantly decrements all values in an internal `dict`, emitting an event when one reaches zero. Also implements subsctipting.
 
@@ -161,7 +161,7 @@ java -cp . FileDumperClient
 
 ## delta coding
 
-[_source_](delta_coding.py)
+[_source_](python/delta_coding.py)
 
 An implementation of [delta coding](https://en.wikipedia.org/wiki/Delta_encoding).
 
@@ -177,7 +177,7 @@ print(encoded, decoded)
 
 ## "repeat every" threads
 
-[_source_](repeat_every_threads.py)
+[_source_](python/repeat_every_threads.py)
 
 Simple threads, based on the [waiter threads](https://github.com/qeamlgit/random#waiter-threads), which run the wrapped function evey `n` seconds, rather than `n` seconds after the `.start()` call.
 
@@ -208,7 +208,7 @@ aret.start()
 
 ## eval server
 
-[_source_](eval_server.py)
+[_source_](python/eval_server.py)
 
 A simple server which writes all input into a file and then uses a subprocess to evaluate it, then returning the result.
 
@@ -231,7 +231,7 @@ while True:
 
 ## JSON DB
 
-[_source_](json_db.py)
+[_source_](python/json_db.py)
 
 A JSON-based serverless database. A cool feature is that the database instead of returning `dict`s as expected, it returns special `DBObject` objects, which function like any other dict, but modifying their contents also modifies their contents in the actual database. Thanks to this, you can make your way through deep these objects (eg. `db['this']['is']['a']['very']['long']['path']`) and all changes you make will be saved.
 
@@ -250,7 +250,7 @@ print(db['object']['key']) #different value
 
 ## dictfile
 
-[_source_](dictfile.py)
+[_source_](python/dictfile.py)
 
 Simple, cached dict-access to a simply formatted file.
 
@@ -284,7 +284,7 @@ df["value"]   # cache hit, but it's stale, so will read from file
 
 ## File Corruptor
 
-[_source_](file_corruptor.py)
+[_source_](python/file_corruptor.py)
 
 A simple script that corrupts a portion of any file. You are free to specify how
 much corruption you want in your file. The original file remains untouched, and
@@ -303,7 +303,7 @@ corrupt(fn, amt)
 
 ## HumanDir
 
-[_source_](humandir.py)
+[_source_](python/humandir.py)
 
 A more human-friendly way to interact with directories. Can create subdirectories,
 files and subdirectory hierarchiies. Also allows to run commands from the
