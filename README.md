@@ -1,20 +1,22 @@
 # table of contents
 
-1. [chance](https://github.com/qeamlgit/random#chance)
-2. [code generator](https://github.com/qeamlgit/random#code-generator)
-3. [discord cache](https://github.com/qeamlgit/random#discord-cache)
-4. [tuple from timedelta](https://github.com/qeamlgit/random#tuple-from-timedelta)
-5. [waiter threads](https://github.com/qeamlgit/random#waiter-threads)
-6. [cooldown thread](https://github.com/qeamlgit/random#cooldown-thread)
-7. [file dumper](https://github.com/qeamlgit/random#file-dumper)
-8. [FileDumperClient](https://github.com/qeamlgit/random#filedumperclient)
-9. [delta coding](https://github.com/qeamlgit/random#delta-coding)
-10. ["repeat every" threads](https://github.com/qeamlgit/random#repeat-every-threads)
-11. [eval server](https://github.com/qeamlgit/random#eval-server)
-12. [JSON DB](https://github.com/qeamlgit/random#json-db)
-13. [dictfile](https://github.com/qeamlgit/random#dictfile)
-14. [File Corruptor](https://github.com/qeamlgit/random#file-corruptor)
-15. [HumanDir](https://github.com/qeamlgit/random#humandir)
+- [chance](https://github.com/qeamlgit/random#chance)
+- [code generator](https://github.com/qeamlgit/random#code-generator)
+- [discord cache](https://github.com/qeamlgit/random#discord-cache)
+- [tuple from timedelta](https://github.com/qeamlgit/random#tuple-from-timedelta)
+- [waiter threads](https://github.com/qeamlgit/random#waiter-threads)
+- [cooldown thread](https://github.com/qeamlgit/random#cooldown-thread)
+- [file dumper](https://github.com/qeamlgit/random#file-dumper)
+- [FileDumperClient](https://github.com/qeamlgit/random#filedumperclient)
+- [delta coding](https://github.com/qeamlgit/random#delta-coding)
+- ["repeat every" threads](https://github.com/qeamlgit/random#repeat-every-threads)
+- [eval server](https://github.com/qeamlgit/random#eval-server)
+- [JSON DB](https://github.com/qeamlgit/random#json-db)
+- [dictfile](https://github.com/qeamlgit/random#dictfile)
+- [File Corruptor](https://github.com/qeamlgit/random#file-corruptor)
+- [HumanDir](https://github.com/qeamlgit/random#humandir)
+
+[top]: https://github.com/qeamlgit/random#table-of-contents
 
 ## chance
 
@@ -30,6 +32,8 @@ if chance(15):
     print("this has a 1 in 15 chance of being printed")
 ```
 
+[_back to top_][top]
+
 ## code generator
 
 [_source_](python/code_generator.py)
@@ -44,11 +48,15 @@ from code_generator import generate_code
 print(generate_code(15))
 ```
 
+[_back to top_][top]
+
 ## discord cache
 
 [_source_](python/discordcache.py)
 
 Enumerates over files copied from Discord's cache and assigns them proper extensions based on the image header.
+
+[_back to top_][top]
 
 ## tuple from timedelta
 
@@ -64,6 +72,8 @@ from datetime import timedelta
 delta = timedelta(hours=49,minutes=44,seconds=13)
 print(get_timedelta_tuple(delta))
 ```
+
+[_back to top_][top]
 
 ## waiter threads
 
@@ -92,6 +102,8 @@ waiter.start()
 waiter2.start(datetime.now()) # the datetime will be passed to waiter2_func
 ```
 
+[_back to top_][top]
+
 ## cooldown thread
 
 [_source_](python/cooldown_thread.py)
@@ -117,6 +129,8 @@ def cooldown_end_event(cooldown):
 ct["restart"] = 5.0   # 5s
 ct['end'] = 10500     # 10500ms == 10.5s
 ```
+
+[_back to top_][top]
 
 ## file dumper
 
@@ -146,6 +160,8 @@ Usage:
 go run filedumper2.go
 ```
 
+[_back to top_][top]
+
 ## FileDumperClient
 
 [_source_](FileDumperClient.java)
@@ -158,6 +174,8 @@ Usage:
 javac FileDumperClient.java
 java -cp . FileDumperClient
 ```
+
+[_back to top_][top]
 
 ## delta coding
 
@@ -174,6 +192,8 @@ encoded = delta_encode(l)
 decoded = delta_decode(encoded)
 print(encoded, decoded)
 ```
+
+[_back to top_][top]
 
 ## "repeat every" threads
 
@@ -206,6 +226,8 @@ ret.start()
 aret.start()
 ```
 
+[_back to top_][top]
+
 ## eval server
 
 [_source_](python/eval_server.py)
@@ -229,6 +251,8 @@ while True:
     handle_conn(c)
 ```
 
+[_back to top_][top]
+
 ## JSON DB
 
 [_source_](python/json_db.py)
@@ -247,6 +271,8 @@ print(db['object']['key']) #another value
 db['object']['key'] = 'different value'
 print(db['object']['key']) #different value
 ```
+
+[_back to top_][top]
 
 ## dictfile
 
@@ -282,6 +308,8 @@ df["value"]   # cache hit, since 30 seconds didn't pass
 df["value"]   # cache hit, but it's stale, so will read from file
 ```
 
+[_back to top_][top]
+
 ## File Corruptor
 
 [_source_](python/file_corruptor.py)
@@ -300,6 +328,8 @@ fn = input("Filename to corrupt:\n").strip()
 amt = float(input("How much corruption? (%)\n").strip()) / 100
 corrupt(fn, amt)
 ```
+
+[_back to top_][top]
 
 ## HumanDir
 
@@ -333,3 +363,5 @@ projdir.cmd("code", ".")
 
 print("Done :)")
 ```
+
+[_back to top_][top]
