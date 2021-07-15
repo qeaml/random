@@ -15,6 +15,7 @@
 - [dictfile](https://github.com/qeamlgit/random#dictfile)
 - [File Corruptor](https://github.com/qeamlgit/random#file-corruptor)
 - [HumanDir](https://github.com/qeamlgit/random#humandir)
+- [WAV Reader](https://github.com/qeamlgit/random#wav-reader)
 
 [top]: https://github.com/qeamlgit/random#table-of-contents
 
@@ -362,6 +363,19 @@ projdir.cmd("git","init")
 projdir.cmd("code", ".")
 
 print("Done :)")
+```
+
+[_back to top_][top]
+
+## WAV Reader
+
+A program that reads RIFF WAVE files. You simply provide it with a filename to
+open and it'll display some basic information about the file.
+
+Usage:
+
+```sh
+go run wavreader.go
 ```
 
 [_back to top_][top]
