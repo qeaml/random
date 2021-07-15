@@ -369,6 +369,8 @@ print("Done :)")
 
 ## WAV Reader
 
+[_source_](wavreader.go)
+
 A program that reads RIFF WAVE files. You simply provide it with a filename to
 open and it'll display some basic information about the file.
 
