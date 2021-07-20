@@ -16,6 +16,7 @@
 - [File Corruptor](https://github.com/qeamlgit/random#file-corruptor)
 - [HumanDir](https://github.com/qeamlgit/random#humandir)
 - [WAV Reader](https://github.com/qeamlgit/random#wav-reader)
+- [GoEval](https://github.com/qeamlgit/random#goeval)
 
 [top]: https://github.com/qeamlgit/random#table-of-contents
 
@@ -378,6 +379,42 @@ Usage:
 
 ```sh
 go run wavreader.go
+```
+
+[_back to top_][top]
+
+## GoEval
+
+[_source_](goeval.go)
+
+A program that is essentially a REPL for Go. You launch it, give it a handful
+of lines of code and it quickly runs it. It's not stupid either! It fully
+supports imports (via `//+import ...`, watch out with `_` and `.` though!), and
+automatically `get`s external packages (from GitHub, gopkg.in, etc.).
+
+Usage:
+
+```sh
+go run goeval.go
+```
+
+Example usage:
+
+```sh
+$ go run goeval.go
+GoEval v1
+>> //+import fmt
+Added import: fmt
+>> fmt.Println("Hello")
+>>
+creating module...
+go: creating new go.mod: module goeval
+go: to add module requirements and sums:
+        go mod tidy
+getting external packages...
+running code...
+==================================================
+Hello
 ```
 
 [_back to top_][top]
