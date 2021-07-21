@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"io"
 	"os"
@@ -9,7 +10,18 @@ import (
 	"strings"
 )
 
-var ver = "1"
+var ver = "2"
+
+func trimImport(src string) string {
+	var out = src
+	if strings.HasPrefix(out, `"`) {
+		out = out[1:]
+	}
+	if strings.HasSuffix(out, `"`) {
+		out = out[:len(out)-1]
+	}
+	return strings.TrimSpace(strings.ToLower(out))
+}
 
 func main() {
 	goexec, err := exec.LookPath("go")
@@ -17,18 +29,35 @@ func main() {
 		fail(err.Error())
 	}
 
+	verbose := false
+	for _, f := range os.Args {
+		if f == "-V" || f == "--verbose" {
+			verbose = true
+		}
+	}
+
+	// default dummy buffer
+	var userOut io.Writer = bytes.NewBufferString("")
+	if verbose {
+		// use stderr instead of stdout
+		// i don't know what the difference between them is lol
+		userOut = os.Stderr
+	}
+
 	imports := []string{}
 	code := []string{}
 	ctx := ""
 	reader := bufio.NewReader(os.Stdin)
 
-	fmt.Println("GoEval v" + ver)
+	fmt.Fprintln(userOut, "GoEval v"+ver+"\n")
+	showHelp()
 
 	for {
 		fmt.Print(">> ")
 		ctx, err = reader.ReadString('\n')
 		if err == io.EOF {
-			break
+			fmt.Print("\n")
+			os.Exit(0)
 		}
 		if err != nil {
 			fail(err.Error())
@@ -36,11 +65,37 @@ func main() {
 		ctx = strings.TrimSpace(ctx)
 
 		if strings.HasPrefix(ctx, "//+import ") && len(ctx) > 10 {
-			imp := strings.TrimSpace(ctx[10:])
+			imp := trimImport(ctx[10:])
 			if imp != "" {
 				imports = append(imports, imp)
-				fmt.Println("Added import:", imp)
 			}
+		} else if strings.HasPrefix(ctx, "//-import") {
+			if len(imports) > 0 {
+				imp := trimImport(ctx[10:])
+				if imp == "" {
+					imp = imports[len(imports)-1]
+				}
+				impNew := []string{}
+				for _, oim := range imports {
+					if strings.HasPrefix(oim, `"`) {
+						oim = oim[1:]
+					}
+					if strings.HasSuffix(oim, `"`) {
+						oim = oim[:len(oim)-1]
+					}
+					if oim != imp {
+						impNew = append(impNew, oim)
+					}
+				}
+				if len(impNew) < len(imports) {
+					fmt.Println("Removed import:", imp)
+					imports = impNew
+				}
+			}
+		} else if strings.HasPrefix(ctx, "//imports") {
+			fmt.Println(strings.Join(imports, ",\n"))
+		} else if ctx == "exit" {
+			os.Exit(0)
 		} else if ctx == "" {
 			path := os.Getenv("TEMP") + string(os.PathSeparator) + "goeval"
 
@@ -99,13 +154,13 @@ func main() {
 			}
 			fmt.Fprint(f, "}")
 
-			fmt.Println("creating module...")
+			fmt.Fprintln(userOut, "creating module...")
 			mod := exec.Cmd{
 				Path:   goexec,
 				Args:   []string{"go", "mod", "init", "goeval"},
 				Dir:    path,
-				Stdout: os.Stderr,
-				Stderr: os.Stderr,
+				Stdout: userOut,
+				Stderr: userOut,
 			}
 			err = mod.Run()
 			if err != nil {
@@ -114,18 +169,13 @@ func main() {
 
 			// go through the imports to find ones that are not in the standard
 			// library, so they can be fetched
-			// TODO: find a better way to do this (look at the stdlib var)
+			// TODO: find a better way to do this (look at the stdlib array)
 			extImports := []string{}
 			for _, im := range imports {
 				if strings.HasPrefix(im, "_") || strings.HasPrefix(im, ".") {
 					im = strings.TrimSpace(im[1:])
 				}
-				if strings.HasPrefix(im, `"`) {
-					im = im[1:]
-				}
-				if strings.HasPrefix(im, `"`) {
-					im = im[:len(im)-1]
-				}
+				im = trimImport(im)
 				for _, stdim := range stdlib {
 					if strings.HasPrefix(im, stdim) {
 						continue
@@ -135,15 +185,16 @@ func main() {
 			}
 
 			if len(extImports) > 0 {
-				fmt.Println("getting external packages...")
+				fmt.Fprintln(userOut, "getting external packages...")
 			}
 			for _, pkg := range extImports {
+				fmt.Fprintln(userOut, "package: ", pkg)
 				get := exec.Cmd{
 					Path:   goexec,
 					Args:   []string{"go", "get", pkg},
 					Dir:    path,
-					Stdout: os.Stderr,
-					Stderr: os.Stderr,
+					Stdout: userOut,
+					Stderr: userOut,
 				}
 				err = get.Run()
 				if err != nil {
@@ -151,7 +202,7 @@ func main() {
 				}
 			}
 
-			fmt.Println("running code...")
+			fmt.Fprintln(userOut, "running code...")
 			fmt.Println("==================================================")
 			run := exec.Cmd{
 				Path:   goexec,
@@ -164,7 +215,8 @@ func main() {
 			if err != nil {
 				fail(err.Error())
 			}
-			break
+			fmt.Println()
+			// break
 		} else {
 			code = append(code, ctx)
 		}
@@ -174,6 +226,17 @@ func main() {
 func fail(msg string) {
 	fmt.Println("ERROR:", msg)
 	os.Exit(-1)
+}
+
+func showHelp() {
+	fmt.Println("Enter Go code below.")
+	fmt.Println("To exit press Ctrl-C or type `exit`.")
+	fmt.Println("To add an import type `//+import ...`.")
+	fmt.Println("To remove the last import, type `//-import`.")
+	fmt.Println("To remove a specific import, type `//-import ...`.")
+	fmt.Println("To view the current imports, type `//imports`.")
+	fmt.Println("Press enter on an empty line to execute.")
+	fmt.Println()
 }
 
 // stdlib contains the names of packages included in the go standard library.
