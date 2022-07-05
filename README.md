@@ -1,24 +1,24 @@
 # table of contents
 
-- [chance](https://github.com/qeamlgit/random#chance)
-- [code generator](https://github.com/qeamlgit/random#code-generator)
-- [discord cache](https://github.com/qeamlgit/random#discord-cache)
-- [tuple from timedelta](https://github.com/qeamlgit/random#tuple-from-timedelta)
-- [waiter threads](https://github.com/qeamlgit/random#waiter-threads)
-- [cooldown thread](https://github.com/qeamlgit/random#cooldown-thread)
-- [file dumper](https://github.com/qeamlgit/random#file-dumper)
-- [FileDumperClient](https://github.com/qeamlgit/random#filedumperclient)
-- [delta coding](https://github.com/qeamlgit/random#delta-coding)
-- ["repeat every" threads](https://github.com/qeamlgit/random#repeat-every-threads)
-- [eval server](https://github.com/qeamlgit/random#eval-server)
-- [JSON DB](https://github.com/qeamlgit/random#json-db)
-- [dictfile](https://github.com/qeamlgit/random#dictfile)
-- [File Corruptor](https://github.com/qeamlgit/random#file-corruptor)
-- [HumanDir](https://github.com/qeamlgit/random#humandir)
-- [WAV Reader](https://github.com/qeamlgit/random#wav-reader)
-- [GoEval](https://github.com/qeamlgit/random#goeval)
+- [chance](https://github.com/qeaml/random#chance)
+- [code generator](https://github.com/qeaml/random#code-generator)
+- [discord cache](https://github.com/qeaml/random#discord-cache)
+- [tuple from timedelta](https://github.com/qeaml/random#tuple-from-timedelta)
+- [waiter threads](https://github.com/qeaml/random#waiter-threads)
+- [cooldown thread](https://github.com/qeaml/random#cooldown-thread)
+- [file dumper](https://github.com/qeaml/random#file-dumper)
+- [FileDumperClient](https://github.com/qeaml/random#filedumperclient)
+- [delta coding](https://github.com/qeaml/random#delta-coding)
+- ["repeat every" threads](https://github.com/qeaml/random#repeat-every-threads)
+- [eval server](https://github.com/qeaml/random#eval-server)
+- [JSON DB](https://github.com/qeaml/random#json-db)
+- [dictfile](https://github.com/qeaml/random#dictfile)
+- [File Corruptor](https://github.com/qeaml/random#file-corruptor)
+- [HumanDir](https://github.com/qeaml/random#humandir)
+- [WAV Reader](https://github.com/qeaml/random#wav-reader)
+- [GoEval](https://github.com/qeaml/random#goeval)
 
-[top]: https://github.com/qeamlgit/random#table-of-contents
+[top]: https://github.com/qeaml/random#table-of-contents
 
 ## chance
 
@@ -168,7 +168,7 @@ go run filedumper2.go
 
 [_source_](FileDumperClient.java)
 
-A simple Java program that connects to a [filedumper](https://github.com/qeamlgit/random#file-dumper) instance (assumed to be running on `localhost:33787`) and allows you to specify a filename and contents of a file.
+A simple Java program that connects to a [filedumper](https://github.com/qeaml/random#file-dumper) instance (assumed to be running on `localhost:33787`) and allows you to specify a filename and contents of a file.
 
 Usage:
 
@@ -201,7 +201,7 @@ print(encoded, decoded)
 
 [_source_](python/repeat_every_threads.py)
 
-Simple threads, based on the [waiter threads](https://github.com/qeamlgit/random#waiter-threads), which run the wrapped function evey `n` seconds, rather than `n` seconds after the `.start()` call.
+Simple threads, based on the [waiter threads](https://github.com/qeaml/random#waiter-threads), which run the wrapped function evey `n` seconds, rather than `n` seconds after the `.start()` call.
 
 Example:
 
