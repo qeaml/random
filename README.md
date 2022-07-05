@@ -17,6 +17,7 @@
 - [HumanDir](https://github.com/qeaml/random#humandir)
 - [WAV Reader](https://github.com/qeaml/random#wav-reader)
 - [GoEval](https://github.com/qeaml/random#goeval)
+- [LOC](https://github.com/qeaml/random#loc)
 
 [top]: https://github.com/qeaml/random#table-of-contents
 
@@ -415,6 +416,44 @@ getting external packages...
 running code...
 ==================================================
 Hello
+```
+
+[_back to top_][top]
+
+## loc
+
+[_source_](loc.c)
+
+LOC is a tiny C program to calculate the line count of any files. The program
+only counts blank lines and lines with content. Comment line counting might
+be implemented at a later date.
+
+Using the program is simple. Every argument passed to the program will be used
+as a filename to count.
+
+```sh
+$ loc loc.c
+File,Blank,Comment,Content
+loc.c,17,0,84
+*,17,0,84
+```
+
+```sh
+$ loc loc.c > loc.c.csv
+$ cat loc.c.csv
+File,Blank,Comment,Content
+loc.c,17,0,84
+*,17,0,84
+```
+
+The output is a CSV sheet containing per-file information and the totals for
+all files (under `*`).
+
+Since LOC is contained entirely within 1 file, compiling it is very easy:
+
+```sh
+# For example, with Clang
+clang -O3 -o loc loc.c
 ```
 
 [_back to top_][top]
