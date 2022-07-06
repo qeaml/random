@@ -424,36 +424,46 @@ Hello
 
 [_source_](loc.c)
 
-LOC is a tiny C program to calculate the line count of any files. The program
+LOC is a tiny C/C++ program to calculate the line count of any files. It
 only counts blank lines and lines with content. Comment line counting might
 be implemented at a later date.
 
 Using the program is simple. Every argument passed to the program will be used
-as a filename to count.
+as a name of a directory to count.
 
 ```sh
-$ loc loc.c
+$ loc loc
+qeaml's loc v2
 File,Blank,Comment,Content
-loc.c,17,0,84
-*,17,0,84
+loc/dir.cpp,2,0,9
+loc/dir.h,6,0,11
+loc/loc.c,21,0,90
+*,29,0,110
 ```
 
 ```sh
-$ loc loc.c > loc.c.csv
-$ cat loc.c.csv
+$ loc loc > loc.csv
+$ cat loc.csv
 File,Blank,Comment,Content
-loc.c,17,0,84
-*,17,0,84
+loc/dir.cpp,2,0,9
+loc/dir.h,6,0,11
+loc/loc.c,21,0,90
+*,29,0,110
 ```
 
 The output is a CSV sheet containing per-file information and the totals for
 all files (under `*`).
 
-Since LOC is contained entirely within 1 file, compiling it is very easy:
+LOC is split into 2 parts: the main program written in C and the directory
+iteration written in C++. You have to compile them separately, but link them
+together into one.
 
 ```sh
-# For example, with Clang
-clang -O3 -o loc loc.c
+# For example, with Clang:
+# Compile dir.o
+clang -O3 -o dir.o -c dir.cpp
+# Then compile and link loc.c with the compiled dir.o
+clang -O3 -o loc loc.c dir.o
 ```
 
 [_back to top_][top]
