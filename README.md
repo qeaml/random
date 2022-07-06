@@ -137,7 +137,7 @@ ct['end'] = 10500     # 10500ms == 10.5s
 
 ## file dumper
 
-[_source_](filedumper2.go)
+[_source_](go/filedumper2/main.go)
 
 Allows you to dump any bytes into a file via a socket on port 33787. Originally
 written in Python, but rewrittern in Go. [_see the old version_](python/filedumper.py)
@@ -160,7 +160,8 @@ Opcodes:
 Usage:
 
 ```shell
-go run filedumper2.go
+cd go/filedumper2
+go run main.go
 ```
 
 [_back to top_][top]
@@ -371,7 +372,7 @@ print("Done :)")
 
 ## WAV Reader
 
-[_source_](wavreader.go)
+[_source_](go/wavreader/main.go)
 
 A program that reads RIFF WAVE files. You simply provide it with a filename to
 open and it'll display some basic information about the file.
@@ -379,14 +380,15 @@ open and it'll display some basic information about the file.
 Usage:
 
 ```sh
-go run wavreader.go
+cd go/wavreader
+go run main.go
 ```
 
 [_back to top_][top]
 
 ## GoEval
 
-[_source_](goeval.go)
+[_source_](go/goeval/main.go)
 
 A program that is essentially a REPL for Go. You launch it, give it a handful
 of lines of code and it quickly runs it. It's not stupid either! It fully
@@ -396,13 +398,15 @@ automatically `get`s external packages (from GitHub, gopkg.in, etc.).
 Usage:
 
 ```sh
-go run goeval.go
+cd go/goeval
+go run main.go
 ```
 
 Example usage:
 
 ```sh
-$ go run goeval.go
+$ cd go/goeval
+$ go run main.go
 GoEval v1
 >> //+import fmt
 Added import: fmt
