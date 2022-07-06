@@ -464,8 +464,8 @@ together into one.
 
 ```sh
 # For example, with Clang:
-# Compile dir.o
-clang -O3 -o dir.o -c dir.cpp
+# Compile dir.o with C++17
+clang -std=c++17 -O3 -o dir.o -c dir.cpp
 # Then compile and link loc.c with the compiled dir.o
 clang -O3 -o loc loc.c dir.o
 ```
